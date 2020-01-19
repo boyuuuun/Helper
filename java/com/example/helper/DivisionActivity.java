@@ -289,7 +289,15 @@ public class DivisionActivity extends Activity implements TextToSpeech.OnInitLis
             builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                    if(test.equals("test")){
+                        if(quizCount+1 == numberOfQuestions){
+                            showResult();
+                        }
+                        else{
+                            ++quizCount;
+                            showNext();
+                        }
+                    }
                 }
             });
 
@@ -314,28 +322,29 @@ public class DivisionActivity extends Activity implements TextToSpeech.OnInitLis
 
     // 결과 출력
     public void showResult() {
-        if(test.equals("test")){
+        if (test.equals("test")) {
             Intent intent = new Intent(getApplicationContext(), AdditionActivity.class);
-            startActivityForResult(intent,5000);
+            intent.putExtra("test", test);
+            startActivityForResult(intent, 5000);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("문제를 모두 푸셨네요!");
+
+            speech = "잘 하셨어요! 문제를 다 푸셨습니다. ";
+            tell.setLanguage(Locale.KOREAN);
+            tell.setPitch(0.6f);
+            tell.setSpeechRate(0.95f);
+            tell.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
+
+            builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(DivisionActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 5000);
+                }
+            });
+            builder.show();
         }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("문제를 모두 푸셨네요!");
-
-        speech = "잘 하셨어요! 문제를 다 푸셨습니다. ";
-        tell.setLanguage(Locale.KOREAN);
-        tell.setPitch(0.6f);
-        tell.setSpeechRate(0.95f);
-        tell.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
-
-        builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(DivisionActivity.this, MainActivity.class);
-                startActivityForResult(intent,5000);
-            }
-        });
-        builder.show();
     }
 
     @Override

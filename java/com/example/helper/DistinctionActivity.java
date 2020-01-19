@@ -241,28 +241,10 @@ public class DistinctionActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void showResult(){
-        // 테스트일 경우 어느 단계에서 틀렸는지 확인할 수 있도록!!
-        if(test.equals("test")){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("끝났습니다.");
-            speech = "끝났습니다.";
-            tell.setLanguage(Locale.KOREAN);
-            tell.setPitch(0.6f);
-            tell.setSpeechRate(0.95f);
-            tell.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
-            builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivityForResult(intent,5000);
-                }
-            });
-            builder.show();
-        }
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("끝났습니다.");
-        speech = "끝났습니다.";
+        builder.setMessage("문제를 모두 푸셨네요!");
+
+        speech = "잘 하셨어요! 문제를 다 푸셨습니다. ";
         tell.setLanguage(Locale.KOREAN);
         tell.setPitch(0.6f);
         tell.setSpeechRate(0.95f);
@@ -271,7 +253,7 @@ public class DistinctionActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(intent,5000);
+                startActivityForResult(intent, 5000);
             }
         });
         builder.show();
@@ -344,6 +326,15 @@ public class DistinctionActivity extends AppCompatActivity implements View.OnCli
             builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    if(test.equals("test")){
+                        if(quizCount==5){
+                            showResult();
+                        }
+                        else{
+                            quizCount++;
+                            showNext();
+                        }
+                    }
                 }
             });
             builder.show();

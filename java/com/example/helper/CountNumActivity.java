@@ -34,66 +34,66 @@ public class CountNumActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<ArrayList<Integer>> quizImage = new ArrayList<>();
 
     String question[][] = {
-        {"공사중"},
-        {"여행"},
-        {"화장실"},
-        {"버스터미널"},
-        {"횡단보도"},
-        {"문화재"},
-        {"교통카드"},
-        {"생활용품"},
-        {"쓰레기통"},
-        {"신호등"},
-        {"친구"},
-        {"손톱깎이"},
-        {"설거지"},
-        {"학교"},
-        {"휴대전화"},
-        {"선생님"},
-        {"실내화"},
-        {"가위바위보"},
-        {"미끄럼틀"},
-        {"안경"},
-        {"부모님"},
-        {"파인애플"},
-        {"지하철"},
-        {"텔레비전"},
-        {"지우개"},
-        {"초콜릿"},
-        {"선물"},
-        {"크레파스"},
-        {"스케치북"},
-        {"와이파이"},
-        {"곰"},
-        {"발"},
-        {"침"},
-        {"힘"},
-        {"돈"},
-        {"숨"},
-        {"솜"},
-        {"살"},
-        {"남"},
-        {"잠"},
-        {"영"},
-        {"알"},
-        {"문"},
-        {"길"},
-        {"실"},
-        {"손"},
-        {"발"},
-        {"약"},
-        {"싹"},
-        {"껌"},
-        {"강"},
-        {"형"},
-        {"춤"},
-        {"밤"},
-        {"불"},
-        {"벽"},
-        {"새"},
-        {"뱀"},
-        {"빗"},
-        {"똥"},};
+            {"공사중"},
+            {"여행"},
+            {"화장실"},
+            {"버스터미널"},
+            {"횡단보도"},
+            {"문화재"},
+            {"교통카드"},
+            {"생활용품"},
+            {"쓰레기통"},
+            {"신호등"},
+            {"친구"},
+            {"손톱깎이"},
+            {"설거지"},
+            {"학교"},
+            {"휴대전화"},
+            {"선생님"},
+            {"실내화"},
+            {"가위바위보"},
+            {"미끄럼틀"},
+            {"안경"},
+            {"부모님"},
+            {"파인애플"},
+            {"지하철"},
+            {"텔레비전"},
+            {"지우개"},
+            {"초콜릿"},
+            {"선물"},
+            {"크레파스"},
+            {"스케치북"},
+            {"와이파이"},
+            {"곰"},
+            {"발"},
+            {"침"},
+            {"힘"},
+            {"돈"},
+            {"숨"},
+            {"솜"},
+            {"살"},
+            {"남"},
+            {"잠"},
+            {"영"},
+            {"알"},
+            {"문"},
+            {"길"},
+            {"실"},
+            {"손"},
+            {"발"},
+            {"약"},
+            {"싹"},
+            {"껌"},
+            {"강"},
+            {"형"},
+            {"춤"},
+            {"밤"},
+            {"불"},
+            {"벽"},
+            {"새"},
+            {"뱀"},
+            {"빗"},
+            {"똥"},};
 
     String answer[][]={
             {"세 글자"},
@@ -159,7 +159,7 @@ public class CountNumActivity extends AppCompatActivity implements View.OnClickL
     };
 
     int image[] = {
-      R.drawable.construction,
+            R.drawable.construction,
             R.drawable.trip,
             R.drawable.toilet,
             R.drawable.bus_stop,
@@ -301,27 +301,28 @@ public class CountNumActivity extends AppCompatActivity implements View.OnClickL
         quizImage.remove(randomNum);
     }
 
-    public void showResult(){
-        if(test.equals("test")){
+    public void showResult() {
+        if (test.equals("test")) {
             Intent intent = new Intent(getApplicationContext(), ComposeActivity.class);
-            startActivityForResult(intent,5000);
+            intent.putExtra("test", test);
+            startActivityForResult(intent, 5000);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("끝났습니다.");
+            speech = "끝났습니다.";
+            tell.setLanguage(Locale.KOREAN);
+            tell.setPitch(0.6f);
+            tell.setSpeechRate(0.95f);
+            tell.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
+            builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivityForResult(intent, 5000);
+                }
+            });
+            builder.show();
         }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("끝났습니다.");
-        speech = "끝났습니다.";
-        tell.setLanguage(Locale.KOREAN);
-        tell.setPitch(0.6f);
-        tell.setSpeechRate(0.95f);
-        tell.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
-        builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(intent,5000);
-            }
-        });
-        builder.show();
     }
 
     @Override
@@ -383,8 +384,9 @@ public class CountNumActivity extends AppCompatActivity implements View.OnClickL
             builder.show();
         }else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("다시 생각해보세요.");
-            speech = "다시 생각해보세요.";
+            builder.setMessage("문제를 모두 푸셨네요!");
+
+            speech = "잘 하셨어요! 문제를 다 푸셨습니다. ";
             tell.setLanguage(Locale.KOREAN);
             tell.setPitch(0.6f);
             tell.setSpeechRate(0.95f);
@@ -392,6 +394,15 @@ public class CountNumActivity extends AppCompatActivity implements View.OnClickL
             builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    if(test.equals("test")){
+                        if(quizCount==5){
+                            showResult();
+                        }
+                        else{
+                            quizCount++;
+                            showNext();
+                        }
+                    }
                 }
             });
             builder.show();

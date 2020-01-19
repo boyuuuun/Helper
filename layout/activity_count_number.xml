@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhiteSmoke"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".CountNumActivity">
+
+        <Button
+            android:id="@+id/back"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="105dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:autoSizeTextType="uniform"
+            android:drawableLeft="@drawable/back_drawable"
+            android:drawablePadding="8dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="3dp"
+            android:text="이전으로"
+            android:textColor="@color/colorBlack" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="2"
+                android:background="@color/colorSnow"
+                android:gravity="center_horizontal"
+                android:text="곰"
+                android:textColor="@color/colorBlack"
+                android:textSize="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text"
+                app:layout_constraintVertical_bias="1.0">
+
+                <TextView
+                    android:id="@+id/sentence"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/colorSnow"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="80dp"
+                    android:text="글자수를 맞춰보세요."
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/one"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorThistle"
+                    android:drawableLeft="@drawable/one_drawable"
+                    android:onClick="onClick"
+                    android:paddingLeft="20dp"
+                    android:text="한 글자"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/two"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:drawableLeft="@drawable/two_drawable"
+                    android:onClick="onClick"
+                    android:paddingLeft="20dp"
+                    android:text="두 글자"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/three"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorThistle"
+                    android:drawableLeft="@drawable/three_drawable"
+                    android:onClick="onClick"
+                    android:paddingLeft="20dp"
+                    android:text="세 글자"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/four"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:drawableLeft="@drawable/four_drawable"
+                    android:onClick="onClick"
+                    android:paddingLeft="20dp"
+                    android:text="네 글자"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/five"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorThistle"
+                    android:drawableLeft="@drawable/five_drawable"
+                    android:onClick="onClick"
+                    android:paddingLeft="20dp"
+                    android:text="다섯 글자"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

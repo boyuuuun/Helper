@@ -46,13 +46,13 @@ public class ConfrontationActivity extends AppCompatActivity implements TextToSp
     private Button speak;
     private ConfrontationQuiz quizzes[] = { new ConfrontationQuiz("화장실", "ㅘ", "ㅚ", "회장실", R.drawable.president_room),
             new ConfrontationQuiz("진구", "ㅣ", "ㅓ", "전구", R.drawable.light_bulb), new ConfrontationQuiz("성물", "ㅇ", "ㄴ", "선물", R.drawable.present),
-            new ConfrontationQuiz("형수", "ㅕ", "ㅑ", "향수", R.drawable.perfume), new ConfrontationQuiz("강", "ㅇ", "ㅁ", "감", R.drawable.river),
+            new ConfrontationQuiz("형수", "ㅕ", "ㅑ", "향수", R.drawable.perfume), new ConfrontationQuiz("강", "ㅇ", "ㅁ", "감", R.drawable.persimmon),
             new ConfrontationQuiz("안약", "ㄴ", "ㄹ", "알약", R.drawable.pill), new ConfrontationQuiz("장사", "ㅅ", "ㅁ", "장마", R.drawable.rain),
             new ConfrontationQuiz("문전", "ㅁ", "ㅇ", "운전", R.drawable.driving), new ConfrontationQuiz("명화", "ㅁ", "ㅇ", "영화", R.drawable.movie),
             new ConfrontationQuiz("공사", "ㅗ", "ㅕ", "경사", R.drawable.slope), new ConfrontationQuiz("인명", "ㅁ", "ㅎ", "인형", R.drawable.doll),
             new ConfrontationQuiz("둥글둥글", "ㅜ", "ㅗ", "동글동글", R.drawable.circle), new ConfrontationQuiz("대구", "ㅜ", "ㅔ", "대게", R.drawable.snow_crab),
             new ConfrontationQuiz("스티커", "ㅣ", "ㅗ", "스토커", R.drawable.stalker), new ConfrontationQuiz("막", "ㅁ", "ㅆ", "싹", R.drawable.sprout),
-            new ConfrontationQuiz("똥", "ㄸ", "ㄱ", "공", R.drawable.ball), new ConfrontationQuiz("검", "ㄱ", "ㄲ", "껌", R.drawable.gum),
+            new ConfrontationQuiz("검", "ㄱ", "ㄲ", "껌", R.drawable.gum),
             new ConfrontationQuiz("영어", "ㅕ", "ㅣ", "잉어", R.drawable.carp), new ConfrontationQuiz("여행", "ㅕ", "ㅠ", "유행", R.drawable.fashion_show),
             new ConfrontationQuiz("박", "ㅏ", "ㅕ", "벽", R.drawable.wall), new ConfrontationQuiz("숨", "ㅅ", "ㅊ", "춤", R.drawable.dance),
             new ConfrontationQuiz("장작", "ㅏ", "ㅓ", "정적", R.drawable.silence) };
@@ -190,7 +190,15 @@ public class ConfrontationActivity extends AppCompatActivity implements TextToSp
                 builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        if(test.equals("test")){
+                            if(quizCount+1 == numberOfQuestions){
+                                showResult();
+                            }
+                            else{
+                                ++quizCount;
+                                showNext();
+                            }
+                        }
                     }
                 });
                 builder.show();
@@ -216,27 +224,28 @@ public class ConfrontationActivity extends AppCompatActivity implements TextToSp
 
     // 결과 출력
     public void showResult() {
-        if(test.equals("test")){
+        if (test.equals("test")) {
             Intent intent = new Intent(getApplicationContext(), DistinctionActivity.class);
-            startActivityForResult(intent,5000);
+            intent.putExtra("test", test);
+            startActivityForResult(intent, 5000);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("문제를 모두 푸셨네요!");
+
+            speech = "잘 하셨어요! 문제를 다 푸셨습니다. ";
+            tell.setLanguage(Locale.KOREAN);
+            tell.setPitch(0.6f);
+            tell.setSpeechRate(0.95f);
+            tell.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
+            builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivityForResult(intent, 5000);
+                }
+            });
+            builder.show();
         }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("문제를 모두 푸셨네요!");
-
-        speech = "잘 하셨어요! 문제를 다 푸셨습니다. ";
-        tell.setLanguage(Locale.KOREAN);
-        tell.setPitch(0.6f);
-        tell.setSpeechRate(0.95f);
-        tell.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
-        builder.setNegativeButton("종료", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(intent,5000);
-            }
-        });
-        builder.show();
     }
 
     @Override

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CountNumActivity.class);
+                test = "no";
+                intent.putExtra("test", test);
                 startActivityForResult(intent,5000);
             }
         });
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ComposeActivity.class);
+                test = "no";
+                intent.putExtra("test", test);
                 startActivityForResult(intent,5000);
             }
         });
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), DivisionActivity.class);
+                test = "no";
+                intent.putExtra("test", test);
                 startActivityForResult(intent,5000);
             }
         });
@@ -66,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AdditionActivity.class);
+                test = "no";
+                intent.putExtra("test", test);
                 startActivityForResult(intent,5000);
             }
         });
@@ -75,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ConfrontationActivity.class);
+                test = "no";
+                intent.putExtra("test", test);
                 startActivityForResult(intent,5000);
             }
         });
@@ -84,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), DistinctionActivity.class);
+                test = "no";
+                intent.putExtra("test", test);
                 startActivityForResult(intent,5000);
             }
         });
